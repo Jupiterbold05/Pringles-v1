@@ -1,0 +1,22 @@
+{
+  "name": "whatsapp-bot",
+  "description": "Pringles Md - A WhatsApp bot with button menus and plugins.",
+  "env": {
+    "BOT_NAME": {
+      "description": "The name of your bot"
+    },
+    "OWNER_NAME": {
+      "description": "The name of the bot owner"
+    },
+    "PORT": {
+      "description": "Port for the server"
+    },
+    "MONGODB_URI": {
+      "description": "MongoDB connection string"
+    }
+  },
+  "scripts": {
+    "postdeploy": "npm install"
+  },
+  "addons": []
+}
