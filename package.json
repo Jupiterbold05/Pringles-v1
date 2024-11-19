@@ -46,9 +46,9 @@
     "jsdom": "^16.4.0",
     "koyeb-api-client": "latest",
     "link-preview-js": "^3.0.0",
-    "moment-timezone": "^0.5.34",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
     "mongoose": "^6.2.1",
     "mumaker": "^2.0.0",
     "node-cron": "^3.0.0",
@@ -87,3 +87,4 @@
   },
   "homepage": "https://github.com/Jupiterbold05/Pringles-v1#readme"
 }
+  
