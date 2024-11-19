@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Custom modules and configurations
-const bot = require(__dirname + '/lib/smd');
+const bot = require(__dirname + '/lib');
 const { VERSION } = require(__dirname + '/config');
 
 // Single file auth state
