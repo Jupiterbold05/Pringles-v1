@@ -1,11 +1,15 @@
 const { default: makeWASocket, DisconnectReason, useSingleFileAuthState } = require('@adiwajshing/baileys');
 const qrcodeTerminal = require('qrcode-terminal');
 const { Boom } = require('@hapi/boom');
-const { state, saveState } = useSingleFileAuthState('./auth_info.json');
+const fs = require('fs');
+const path = require('path');
 
 // Custom modules and configurations
 const bot = require(__dirname + '/lib/smd');
 const { VERSION } = require(__dirname + '/config');
+
+// Single file auth state
+const { state, saveState } = useSingleFileAuthState('./auth_info.json');
 
 const start = async () => {
     console.info(`Pringles-v1 ${VERSION}`);
@@ -17,6 +21,7 @@ const start = async () => {
 
         const conn = makeWASocket({
             auth: state,
+            logger: require('pino')({ level: 'silent' }),
             printQRInTerminal: true
         });
 
@@ -41,7 +46,19 @@ const start = async () => {
             const text = msg.message.conversation || msg.message.extendedTextMessage?.text;
             const from = msg.key.remoteJid;
 
-            if (text === 'hello') {
+            if (text.startsWith('!download ')) {
+                const url = text.split(' ')[1];
+                const filename = 'audio.mp3';
+                try {
+                    await downloadAndConvertToMp3(url, filename);
+                    const filePath = path.resolve(__dirname, filename);
+                    await conn.sendMessage(from, { document: { url: filePath }, mimetype: 'audio/mpeg', fileName: filename });
+                    fs.unlinkSync(filePath); // Clean up the file after sending
+                } catch (error) {
+                    await conn.sendMessage(from, { text: 'Failed to download and convert the video to MP3. Please try again later.' });
+                    console.error(error);
+                }
+            } else if (text === 'hello') {
                 await conn.sendMessage(from, { text: 'Hello! How can I help you?' });
             } else if (text === 'ping') {
                 await conn.sendMessage(from, { text: 'Pong!' });
@@ -52,7 +69,21 @@ const start = async () => {
         console.error(error);
         start();
     }
-}
+};
+
+const downloadAndConvertToMp3 = (url, filename) => {
+    return new Promise((resolve, reject) => {
+        const stream = ytdl(url, { quality: 'highestaudio' });
+        const filePath = path.resolve(__dirname, filename);
+
+        ffmpeg(stream)
+            .audioBitrate(128)
+            .toFormat('mp3')
+            .save(filePath)
+            .on('end', () => resolve(filePath))
+            .on('error', reject);
+    });
+};
 
 start();
-                
+    
