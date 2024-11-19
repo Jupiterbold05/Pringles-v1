@@ -1,24 +1,89 @@
 {
-  "name": "whatsapp-bot",
+  "name": "Pringles-v1",
   "version": "1.0.0",
-  "description": "Pringles Md - A WhatsApp bot with button menus and plugins.",
-  "main": "main.js",
-  "scripts": {
-    "start": "node main.js",
-    "dev": "nodemon main.js"
+  "description": "Multi device WhatsApp bot.",
+  "main": "index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20.0.0"
   },
+  "scripts": {
+    "run": "pm2 start . --deep-monitoring --attach --name Pringles",
+    "pringles": "pm2 start . --deep-monitoring --attach --name Pringles",
+    "start": "pm2 start . --attach --name Pringles",
+    "stop": "pm2 stop Pringles",
+    "dbs--postinstall": "npx puppeteer@latest install --y"
+  },
+  "author": "Jupiterbold05",
+  "license": "Apache-2.0",
   "dependencies": {
-    "whatsapp-web.js": "^1.19.1",
-    "express": "^4.18.2",
-    "dotenv": "^16.0.3",
-    "axios": "^0.27.2",
-    "mongoose": "^6.1.0",
-    "nodemon": "^2.0.22"
+    "@adiwajshing/keyed-db": "^0.2.4",
+    "@hapi/boom": "^9.1.4",
+    "@whiskeysockets/baileys": "6.6.0",
+    "acrcloud": "^1.4.0",
+    "anime-character-random": "latest",
+    "aptoide-scraper": "latest",
+    "async-g-i-s": "^1.4.0",
+    "axios": "^0.24.0",
+    "canvas": "^2.11.2",
+    "cheerio": "^1.0.0-rc.10",
+    "child_process": "^1.0.2",
+    "crypto-js": "latest",
+    "discord-mongoose-economy": "^1.2.0",
+    "discord-xp": "^1.1.16",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "ffmpeg": "^0.0.4",
+    "file-type": "^16.5.3",
+    "fluent-ffmpeg": "^2.1.2",
+    "form-data": "^4.0.0",
+    "fs-extra": "^10.1.0",
+    "google-it": "^1.6.4",
+    "google-tts-api": "^2.0.2",
+    "heroku-client": "3.1.0",
+    "human-readable": "^0.2.1",
+    "jimp": "^0.16.1",
+    "jsdom": "^16.4.0",
+    "koyeb-api-client": "latest",
+    "link-preview-js": "^3.0.0",
+    "moment-timezone": "^0.5.34",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.1",
+    "mumaker": "^2.0.0",
+    "node-cron": "^3.0.0",
+    "node-fetch": "^2.6.1",
+    "node-schedule": "^2.0.0",
+    "node-webpmux": "^3.1.0",
+    "pastebin-js": "latest",
+    "path": "^0.12.7",
+    "pg": "^8.11.3",
+    "pm2": "^5.2.0",
+    "puppeteer": "latest",
+    "qrcode": "latest",
+    "ruhend-scraper": "^8.0.3",
+    "secktor-pack": "latest",
+    "simple-git": "^3.15.1",
+    "chalk": "^4.1.0",
+    "translatte": "^3.0.1",
+    "util": "^0.12.4",
+    "wa-sticker-formatter": "^4.3.2",
+    "youtubei.js": "9.4.0",
+    "ytdl-secktor": "latest"
+  },
+  "directories": {
+    "lib": "lib",
+    "plugins": "lib/plugins"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "pino": "^7.0.5"
   },
-  "engines": {
-    "node": ">=14.0.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jupiterbold05/Pringles-v1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jupiterbold05/Pringles-v1/issues"
+  },
+  "homepage": "https://github.com/Jupiterbold05/Pringles-v1#readme"
 }
